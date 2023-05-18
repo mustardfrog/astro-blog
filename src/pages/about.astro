@@ -1,4 +1,8 @@
 ---
+import '../styles/global.css'
+import Navigation from '../components/Navigation.astro' ;
+import Footer from '../components/Footer.astro' ;
+
 const pageTitle = "About Me";
 
 const identity = {
@@ -11,6 +15,10 @@ const identity = {
 const skills = ["rust", "C++", "java"];
 
 const display = false;
+
+const skillColor = "navy";
+const fontWeight = "bold";
+const textCase = "uppercase";
 ---
 
 <html lang="en">
@@ -20,11 +28,21 @@ const display = false;
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{pageTitle}</title>
+
+        <style define:vars={{skillColor, fontWeight, textCase}}>
+            h1 {
+                color: purple;
+                font-size: 4rem;
+            }
+            .skills {
+                color: var(--skillColor);
+                font-weight: var(--fontWeight);
+                text-transform: var(--textCase);
+            }
+        </style>
 	</head>
 	<body>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/blog">Blog</a>
+        <Navigation />
 
 		<h1>{pageTitle}</h1>
         <p> I hope to work with rust in the future!</p>
@@ -40,10 +58,11 @@ const display = false;
 
         <p>My Skills are:</p>
         <ul>
-            {skills.map((skill) => <li>{skill}</li>)}
+            {skills.map((skill) => <li class="skills">{skill}</li>)}
         </ul>
 
         <h3>{display ? <p> I want to display this</p> : <p> I didn't want to display this</p>}</h3>
 
+        <Footer />
 	</body>
 </html>
